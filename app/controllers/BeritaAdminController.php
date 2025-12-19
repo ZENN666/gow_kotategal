@@ -1,123 +1,141 @@
 <?php
-// app/Controllers/BeritaAdminController.php
 
 class BeritaAdminController
 {
     public function __construct()
     {
-        // Mulai session kalau belum aktif
         if (session_status() === PHP_SESSION_NONE) {
             session_start();
         }
 
-        // Cek login admin
-        if (!isset($_SESSION['admin_logged_in'])) {
+        if (empty($_SESSION['admin'])) {
             header('Location: ' . base_url('admin/login'));
             exit;
         }
     }
 
-    // ================== INDEX ==================
+    // ================= LIST =================
     public function index()
     {
-        global $db;
+        global $pdo;
 
-        $query = $db->query("SELECT * FROM berita ORDER BY created_at DESC");
-        $posts = $query->fetch_all(MYSQLI_ASSOC);
+        $stmt = $pdo->query(
+            "SELECT id, title, author, slug, created_at
+             FROM berita
+             ORDER BY created_at DESC"
+        );
 
-        $title = 'Kelola Berita - Admin';
+        $posts = $stmt->fetchAll();
+
         include __DIR__ . '/../Views/admin/berita/index.php';
     }
 
-    // ================== CREATE ==================
+    // ================= FORM TAMBAH =================
     public function create()
     {
-        $title = 'Tambah Berita - Admin';
         include __DIR__ . '/../Views/admin/berita/create.php';
     }
 
-    // ================== STORE ==================
+    // ================= SIMPAN =================
     public function store()
     {
-        global $db;
+        global $pdo;
 
-        $judul = $_POST['title'] ?? '';
-        $slug = strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $judul)));
-        $content = $_POST['content'] ?? '';
+        $title = trim($_POST['title']);
+        $content = $_POST['content'];
+        $author = $_SESSION['admin']['username'];
 
-        // Upload thumbnail jika ada
-        $thumbnail = '';
+        $slug = strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $title))) . '-' . time();
+
+        // ================= UPLOAD THUMBNAIL =================
+        $thumbnail = null;
+
         if (!empty($_FILES['thumbnail']['name'])) {
-            $fileName = time() . '_' . $_FILES['thumbnail']['name'];
-            move_uploaded_file($_FILES['thumbnail']['tmp_name'], __DIR__ . '/../../uploads/' . $fileName);
-            $thumbnail = $fileName;
+            $filename = time() . '_' . $_FILES['thumbnail']['name'];
+            $target = __DIR__ . '/../../public/uploads/' . $filename;
+
+            if (move_uploaded_file($_FILES['thumbnail']['tmp_name'], $target)) {
+                $thumbnail = $filename;
+            }
         }
 
-        $stmt = $db->prepare("INSERT INTO berita (title, slug, content, thumbnail, created_at) VALUES (?, ?, ?, ?, NOW())");
-        $stmt->bind_param('ssss', $judul, $slug, $content, $thumbnail);
-        $stmt->execute();
+        $stmt = $pdo->prepare(
+            "INSERT INTO berita (title, author, slug, content, thumbnail, created_at)
+             VALUES (?, ?, ?, ?, ?, NOW())"
+        );
+
+        $stmt->execute([
+            $title,
+            $author,
+            $slug,
+            $content,
+            $thumbnail
+        ]);
 
         header('Location: ' . base_url('admin/berita'));
         exit;
     }
 
-    // ================== EDIT ==================
-    public function edit($slug)
+    // ================= EDIT =================
+    public function edit(string $slug)
     {
-        global $db;
+        global $pdo;
 
-        $stmt = $db->prepare("SELECT * FROM berita WHERE slug = ?");
-        $stmt->bind_param('s', $slug);
-        $stmt->execute();
-        $result = $stmt->get_result();
-        $post = $result->fetch_assoc();
+        $stmt = $pdo->prepare("SELECT * FROM berita WHERE slug = ?");
+        $stmt->execute([$slug]);
+        $post = $stmt->fetch();
 
         if (!$post) {
-            http_response_code(404);
             echo 'Berita tidak ditemukan';
             exit;
         }
 
-        $title = 'Edit Berita - Admin';
         include __DIR__ . '/../Views/admin/berita/edit.php';
     }
 
-    // ================== UPDATE ==================
-    public function update($slug)
+    // ================= UPDATE =================
+    public function update(string $slug)
     {
-        global $db;
+        global $pdo;
 
-        $judul = $_POST['title'] ?? '';
-        $new_slug = strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $judul)));
-        $content = $_POST['content'] ?? '';
+        $title = trim($_POST['title']);
+        $content = $_POST['content'];
 
-        // Upload thumbnail baru jika ada
-        $thumbnail = '';
+        // kalau upload thumbnail baru
         if (!empty($_FILES['thumbnail']['name'])) {
-            $fileName = time() . '_' . $_FILES['thumbnail']['name'];
-            move_uploaded_file($_FILES['thumbnail']['tmp_name'], __DIR__ . '/../../uploads/' . $fileName);
-            $thumbnail = $fileName;
+            $filename = time() . '_' . $_FILES['thumbnail']['name'];
+            $target = __DIR__ . '/../../public/uploads/' . $filename;
 
-            $stmt = $db->prepare("UPDATE berita SET title=?, slug=?, content=?, thumbnail=? WHERE slug=?");
-            $stmt->bind_param('sssss', $judul, $new_slug, $content, $thumbnail, $slug);
+            move_uploaded_file($_FILES['thumbnail']['tmp_name'], $target);
+
+            $stmt = $pdo->prepare(
+                "UPDATE berita
+                 SET title=?, content=?, thumbnail=?
+                 WHERE slug=?"
+            );
+
+            $stmt->execute([$title, $content, $filename, $slug]);
         } else {
-            $stmt = $db->prepare("UPDATE berita SET title=?, slug=?, content=? WHERE slug=?");
-            $stmt->bind_param('ssss', $judul, $new_slug, $content, $slug);
+            $stmt = $pdo->prepare(
+                "UPDATE berita
+                 SET title=?, content=?
+                 WHERE slug=?"
+            );
+
+            $stmt->execute([$title, $content, $slug]);
         }
 
-        $stmt->execute();
         header('Location: ' . base_url('admin/berita'));
         exit;
     }
 
-    // ================== DELETE ==================
-    public function delete($slug)
+    // ================= DELETE =================
+    public function delete(string $slug)
     {
-        global $db;
+        global $pdo;
 
-        $stmt = $db->prepare("DELETE FROM berita WHERE slug = ?");
-        $stmt->bind_param('s', $slug);
-        $stmt->execute();
+        $stmt = $pdo->prepare("DELETE FROM berita WHERE slug = ?");
+        $stmt->execute([$slug]);
 
         header('Location: ' . base_url('admin/berita'));
         exit;

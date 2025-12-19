@@ -1,49 +1,45 @@
-<?php
-// app/Views/admin/berita/edit.php
-?>
 <!DOCTYPE html>
-<html lang="id">
+<html>
 
 <head>
-    <meta charset="UTF-8">
-    <title><?= $title ?></title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>Edit Berita</title>
 </head>
 
 <body>
-    <div class="container mt-5">
-        <h1 class="mb-4"><?= $title ?></h1>
-        <a href="<?= base_url('admin/berita') ?>" class="btn btn-secondary mb-3">← Kembali</a>
 
-        <form action="<?= base_url('admin/berita/update/' . $post['slug']) ?>" method="post"
-            enctype="multipart/form-data">
-            <div class="mb-3">
-                <label for="title" class="form-label">Judul Berita</label>
-                <input type="text" name="title" id="title" class="form-control"
-                    value="<?= htmlspecialchars($post['title']) ?>" required>
-            </div>
+    <h1>Edit Berita</h1>
 
-            <div class="mb-3">
-                <label for="content" class="form-label">Konten</label>
-                <textarea name="content" id="content" rows="6" class="form-control"
-                    required><?= htmlspecialchars($post['content']) ?></textarea>
-            </div>
+    <p>
+        <a href="/gow_tgl/public/admin/berita">← Kembali</a>
+    </p>
 
-            <div class="mb-3">
-                <label for="thumbnail" class="form-label">Thumbnail</label>
-                <?php if ($post['thumbnail']): ?>
-                    <div class="mb-2">
-                        <img src="<?= base_url('uploads/' . $post['thumbnail']) ?>" style="height:100px;">
-                    </div>
-                <?php endif; ?>
-                <input type="file" name="thumbnail" id="thumbnail" class="form-control">
-                <small class="text-muted">Biarkan kosong jika tidak ingin mengubah gambar</small>
-            </div>
+    <form method="POST" action="/gow_tgl/public/admin/berita/update/<?= $post['slug'] ?>" enctype="multipart/form-data">
 
-            <button type="submit" class="btn btn-primary">Update</button>
-        </form>
-    </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+        <p>
+            <label>Judul</label><br>
+            <input type="text" name="title" value="<?= htmlspecialchars($post['title']) ?>" required>
+        </p>
+
+        <p>
+            <label>Konten</label><br>
+            <textarea name="content" rows="10" cols="50" required><?= htmlspecialchars($post['content']) ?></textarea>
+        </p>
+
+        <p>
+            <label>Thumbnail Baru (opsional)</label><br>
+            <input type="file" name="thumbnail" accept="image/*">
+        </p>
+
+        <?php if (!empty($post['thumbnail'])): ?>
+            <p>
+                <img src="/gow_tgl/public/uploads/<?= $post['thumbnail'] ?>" width="150">
+            </p>
+        <?php endif; ?>
+
+        <button type="submit">Update</button>
+
+    </form>
+
 </body>
 
 </html>

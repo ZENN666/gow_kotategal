@@ -2,19 +2,26 @@
 
 class HomeController
 {
-    public static function index()
+    public function index()
     {
         global $pdo;
 
-        $stmt = $pdo->query("
-            SELECT id, title, slug, content, thumbnail, created_at
-            FROM posts
-            ORDER BY created_at DESC
-            LIMIT 3
-        ");
+        $stmt = $pdo->query(
+            "SELECT id, title, slug, thumbnail, content, created_at
+             FROM berita
+             ORDER BY created_at DESC
+             LIMIT 3"
+        );
 
+        // INI YANG PENTING
         $latestPosts = $stmt->fetchAll();
 
-        require __DIR__ . '/../Views/home.php';
+        // OPTIONAL: metadata biar gak undefined
+        $og_title = 'Beranda - GOW Kota Tegal';
+        $og_desc = 'Gabungan Organisasi Wanita Kota Tegal';
+        $og_url = base_url();
+        $og_img = base_url('assets/img/hero.png');
+
+        include __DIR__ . '/../Views/home.php';
     }
 }

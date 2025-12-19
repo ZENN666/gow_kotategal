@@ -1,4 +1,7 @@
 <?php
+
+
+define('BASE_PATH', '/gow_tgl/public');
 // Memulai session supaya bisa pakai $_SESSION di seluruh file
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
@@ -82,4 +85,13 @@ function view(string $path, array $data = [])
 {
     extract($data);
     include __DIR__ . '/../app/Views/' . $path . '.php';
+}
+
+function adminAuth()
+{
+    session_start();
+    if (!isset($_SESSION['admin'])) {
+        header('Location: /admin/login');
+        exit;
+    }
 }
