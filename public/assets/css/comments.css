@@ -1,0 +1,34 @@
+.comment {
+    padding: 10px 15px;
+    border-radius: 8px;
+    margin-bottom: 8px;
+    background-color: #f8f9fa;
+    position: relative;
+}
+
+.comment.admin {
+    background-color: #fff3cd; /* highlight admin */
+    border-left: 3px solid #ffc107;
+}
+
+.comment .avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 8px;
+}
+
+.comment .reply-btn {
+    font-size: 0.8rem;
+    padding: 0;
+}
+
+.comment .collapse-toggle {
+    font-size: 0.8rem;
+    cursor: pointer;
+    color: #0d6efd;
+}
+
+.replies { margin-left: 2rem; }
+.d-none { display: none !important; }

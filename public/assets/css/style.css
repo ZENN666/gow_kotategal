@@ -1,0 +1,201 @@
+/* =========================
+   GOW BRAND VARIABLES
+========================= */
+:root {
+  --gow-orange: #ff7f00;       /* warna utama navbar & highlight */
+  --gow-orange-dark: #e65c00;  /* warna hover/tombol lebih gelap */
+  --gow-gray: #64748b;
+}
+
+/* =========================
+   GLOBAL
+========================= */
+body {
+  font-family: 'Poppins', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  color: #1f2937;
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+h1, h2, h3, h4, h5 {
+  font-weight: 700;
+}
+
+main {
+  flex: 1 0 auto;
+}
+
+/* =========================
+   NAVBAR (APP BAR STYLE)
+========================= */
+.gow-navbar {
+  background-color: var(--gow-orange) !important;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.gow-navbar .navbar-brand {
+  color: #ffffff !important;
+  font-weight: 700;
+}
+
+.gow-navbar .navbar-brand:hover {
+  color: #fff8e6 !important;
+}
+
+.gow-navbar .nav-link {
+  color: #ffffff !important;
+  font-weight: 500;
+}
+
+.gow-navbar .nav-link:hover {
+  color: #fff8e6 !important;
+}
+
+.gow-navbar .nav-link.active {
+  color: #ffffff !important;
+  font-weight: 600;
+}
+
+.gow-navbar .navbar-toggler {
+  border-color: rgba(255,255,255,0.7);
+}
+
+.gow-navbar .navbar-toggler-icon {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(255,255,255,0.9)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
+
+/* =========================
+   BUTTON (BOOTSTRAP 5 OVERRIDE)
+========================= */
+.btn-primary {
+  --bs-btn-bg: var(--gow-orange);
+  --bs-btn-border-color: var(--gow-orange);
+  --bs-btn-hover-bg: var(--gow-orange-dark);
+  --bs-btn-hover-border-color: var(--gow-orange-dark);
+  --bs-btn-active-bg: var(--gow-orange-dark);
+  --bs-btn-active-border-color: var(--gow-orange-dark);
+  --bs-btn-focus-shadow-rgb: 255,127,0;
+}
+
+.btn-outline-primary {
+  --bs-btn-color: var(--gow-orange);
+  --bs-btn-border-color: var(--gow-orange);
+  --bs-btn-hover-bg: var(--gow-orange);
+  --bs-btn-hover-border-color: var(--gow-orange);
+  --bs-btn-hover-color: #ffffff;
+  --bs-btn-focus-shadow-rgb: 255,127,0;
+}
+
+/* =========================
+   CARD
+========================= */
+.card {
+  border: none;
+  border-radius: 14px;
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+}
+
+.card-title {
+  font-weight: 600;
+}
+
+/* =========================
+   HERO
+========================= */
+.hero {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 127, 0, 0.08),
+    rgba(255, 127, 0, 0.02)
+  );
+}
+
+/* =========================
+   FOOTER
+========================= */
+footer {
+  background-color: #0f172a;
+  color: #cbd5f5;
+  flex-shrink: 0;
+  padding: 1.5rem 0;
+  text-align: center;
+}
+
+footer a {
+  color: #cbd5f5;
+  text-decoration: none;
+}
+
+footer a:hover {
+  color: var(--gow-orange);
+}
+
+/* =========================
+   PAGINATION
+========================= */
+.pagination {
+  --bs-pagination-color: var(--gow-orange);
+  --bs-pagination-border-color: #e5e7eb;
+  --bs-pagination-hover-color: #fff;
+  --bs-pagination-hover-bg: var(--gow-orange);
+  --bs-pagination-hover-border-color: var(--gow-orange);
+  --bs-pagination-active-color: #fff;
+  --bs-pagination-active-bg: var(--gow-orange);
+  --bs-pagination-active-border-color: var(--gow-orange);
+  --bs-pagination-disabled-color: #94a3b8;
+  --bs-pagination-disabled-bg: #f8fafc;
+  --bs-pagination-disabled-border-color: #e5e7eb;
+}
+
+.page-link { 
+  border-radius: 8px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+/* =========================
+   SKELETON LOADER
+========================= */
+.skeleton {
+  background: linear-gradient(
+    100deg,
+    #e5e7eb 40%,
+    #f3f4f6 50%,
+    #e5e7eb 60%
+  );
+  background-size: 200% 100%;
+  animation: skeleton-loading 1.4s infinite;
+  border-radius: 8px;
+}
+
+@keyframes skeleton-loading {
+  to {
+    background-position-x: -200%;
+  }
+}
+
+.skeleton-img { height: 200px; width: 100%; }
+.skeleton-title { height: 18px; width: 80%; margin-bottom: 10px; }
+.skeleton-text { height: 14px; width: 100%; margin-bottom: 6px; }
+
+/* =========================
+   GALERI MODAL & CAROUSEL
+========================= */
+.modal-backdrop.show { opacity: 0.85; }
+.modal-content.bg-dark { background-color: rgba(0,0,0,0.9) !important; border: none; }
+.carousel-item img { background-color: transparent; }
+
+.btn-close-white { filter: invert(1); opacity: 0.8; }
+.btn-close-white:hover { opacity: 1; }
+
+#galleryCarousel { touch-action: pan-y; }
+#galleryCarousel .carousel-item { transition: transform 0.35s ease-in-out; }
+.modal-open { overflow: hidden; }
+.gallery-close { z-index: 1060; }

@@ -1,0 +1,36 @@
+# Composer dependencies
+/vendor/
+
+# Node.js dependencies (kalau ada)
+node_modules/
+
+# Environment & secrets
+.env
+.env.local
+.env.*.local
+
+# Log & cache files
+*.log
+*.cache
+*.tmp
+*.swp
+*.DS_Store
+
+# OS files
+Thumbs.db
+Desktop.ini
+
+# PHPStorm / IDE files
+.idea/
+*.iml
+
+# Public auth folder (secrets)
+public/auth/
+
+# Optional: build output / vendor-like folders
+build/
+dist/
+
+# Backup files
+*.bak
+*.old
