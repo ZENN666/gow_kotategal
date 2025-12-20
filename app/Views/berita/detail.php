@@ -10,9 +10,12 @@ ob_start();
 
                 <h1 class="fw-bold mb-3"><?= htmlspecialchars($post['title']) ?></h1>
 
-                <p class="text-muted mb-4">
-                    Diposting pada <?= date('d M Y', strtotime($post['created_at'])) ?>
-                </p>
+                <!-- Author + Tanggal -->
+                <div class="d-flex align-items-center text-muted mb-4" style="gap: 15px; font-size: 0.9rem;">
+                    <span><?= htmlspecialchars($post['author']) ?></strong></span>
+                    <span>|</span>
+                    <span><?= date('d M Y', strtotime($post['created_at'])) ?></span>
+                </div>
 
                 <?php if (!empty($post['thumbnail'])): ?>
                     <img src="<?= base_url('uploads/' . $post['thumbnail']) ?>" class="img-fluid rounded mb-4"

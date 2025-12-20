@@ -43,7 +43,7 @@ class BeritaAdminController
 
         $title = trim($_POST['title']);
         $content = $_POST['content'];
-        $author = $_SESSION['admin']['username'];
+        $author = trim($_POST['author']); // ambil dari input form, bukan session
 
         $slug = strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $title))) . '-' . time();
 
@@ -61,7 +61,7 @@ class BeritaAdminController
 
         $stmt = $pdo->prepare(
             "INSERT INTO berita (title, author, slug, content, thumbnail, created_at)
-             VALUES (?, ?, ?, ?, ?, NOW())"
+         VALUES (?, ?, ?, ?, ?, NOW())"
         );
 
         $stmt->execute([
@@ -75,6 +75,7 @@ class BeritaAdminController
         header('Location: ' . base_url('admin/berita'));
         exit;
     }
+
 
     // ================= EDIT =================
     public function edit(string $slug)
