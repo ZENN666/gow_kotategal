@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title><?= htmlspecialchars($og_title) ?></title>
+    <title>GOW Kota Tegal | Website Resmi</title>
     <meta name="description" content="<?= htmlspecialchars($og_desc) ?>">
     <link rel="canonical" href="<?= $og_url ?>">
 

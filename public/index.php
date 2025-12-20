@@ -15,6 +15,10 @@ require_once __DIR__ . '/../app/Controllers/PagesController.php';
 require_once __DIR__ . '/../app/Controllers/AuthController.php';
 require_once __DIR__ . '/../app/Controllers/BeritaAdminController.php';
 
+//helpers
+require_once __DIR__ . '/../app/helpers/date_helper.php';
+
+
 // ================== INIT ==================
 $router = new Router();
 $pages = new PagesController();
