@@ -43,7 +43,8 @@ class BeritaAdminController
 
         $title = trim($_POST['title']);
         $content = $_POST['content'];
-        $author = $_SESSION['admin']['username'];
+        $author = trim($_POST['author']); //jika author adalah admin maka $author = trim($_POST['author']);
+        $thumbnail_caption = trim($_POST['thumbnail_caption'] ?? null);
 
         $slug = strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $title))) . '-' . time();
 
@@ -60,8 +61,9 @@ class BeritaAdminController
         }
 
         $stmt = $pdo->prepare(
-            "INSERT INTO berita (title, author, slug, content, thumbnail, created_at)
-             VALUES (?, ?, ?, ?, ?, NOW())"
+            "INSERT INTO berita
+            (title, author, slug, content, thumbnail, thumbnail_caption, created_at)
+            VALUES (?, ?, ?, ?, ?, ?, NOW())"
         );
 
         $stmt->execute([
@@ -69,7 +71,8 @@ class BeritaAdminController
             $author,
             $slug,
             $content,
-            $thumbnail
+            $thumbnail,
+            $thumbnail_caption
         ]);
 
         header('Location: ' . base_url('admin/berita'));
@@ -100,6 +103,7 @@ class BeritaAdminController
 
         $title = trim($_POST['title']);
         $content = $_POST['content'];
+        $thumbnail_caption = trim($_POST['thumbnail_caption'] ?? null);
 
         // kalau upload thumbnail baru
         if (!empty($_FILES['thumbnail']['name'])) {
@@ -110,19 +114,30 @@ class BeritaAdminController
 
             $stmt = $pdo->prepare(
                 "UPDATE berita
-                 SET title=?, content=?, thumbnail=?
-                 WHERE slug=?"
+                 SET title = ?, content = ?, thumbnail = ?, thumbnail_caption = ?
+                 WHERE slug = ?"
             );
 
-            $stmt->execute([$title, $content, $filename, $slug]);
+            $stmt->execute([
+                $title,
+                $content,
+                $filename,
+                $thumbnail_caption,
+                $slug
+            ]);
         } else {
             $stmt = $pdo->prepare(
                 "UPDATE berita
-                 SET title=?, content=?
-                 WHERE slug=?"
+                 SET title = ?, content = ?, thumbnail_caption = ?
+                 WHERE slug = ?"
             );
 
-            $stmt->execute([$title, $content, $slug]);
+            $stmt->execute([
+                $title,
+                $content,
+                $thumbnail_caption,
+                $slug
+            ]);
         }
 
         header('Location: ' . base_url('admin/berita'));

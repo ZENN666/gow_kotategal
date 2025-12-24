@@ -1,44 +1,134 @@
 <!DOCTYPE html>
-<html>
+<html lang="id">
 
 <head>
+    <meta charset="UTF-8">
     <title>Edit Berita</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <style>
+        body {
+            background-color: #f5f6fa;
+        }
+
+        /* App Bar */
+        .app-bar {
+            background-color: #ff7f00;
+            color: #fff;
+            padding: 16px 24px;
+            margin-bottom: 20px;
+        }
+
+        .app-bar h4 {
+            margin: 0;
+            font-weight: 600;
+        }
+
+        .card {
+            border: none;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        textarea#content {
+            min-height: 300px;
+            resize: vertical;
+        }
+    </style>
 </head>
 
 <body>
 
-    <h1>Edit Berita</h1>
+    <!-- App Bar -->
+    <div class="app-bar">
+        <h4>Kelola Berita</h4>
+    </div>
 
-    <p>
-        <a href="/gow_tgl/public/admin/berita">← Kembali</a>
-    </p>
+    <div class="container-fluid px-4 pb-4">
 
-    <form method="POST" action="/gow_tgl/public/admin/berita/update/<?= $post['slug'] ?>" enctype="multipart/form-data">
+        <!-- Breadcrumb -->
+        <nav aria-label="breadcrumb" class="mb-3">
+            <ol class="breadcrumb mb-0">
+                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                <li class="breadcrumb-item">
+                    <a href="<?= base_url('admin/berita') ?>">Kelola Berita</a>
+                </li>
+                <li class="breadcrumb-item active">Edit Berita</li>
+            </ol>
+        </nav>
 
-        <p>
-            <label>Judul</label><br>
-            <input type="text" name="title" value="<?= htmlspecialchars($post['title']) ?>" required>
-        </p>
+        <!-- Header -->
+        <div class="mb-3">
+            <h5 class="mb-0">Edit Berita</h5>
+        </div>
 
-        <p>
-            <label>Konten</label><br>
-            <textarea name="content" rows="10" cols="50" required><?= htmlspecialchars($post['content']) ?></textarea>
-        </p>
+        <!-- Card -->
+        <div class="card">
+            <div class="card-body">
 
-        <p>
-            <label>Thumbnail Baru (opsional)</label><br>
-            <input type="file" name="thumbnail" accept="image/*">
-        </p>
+                <form method="POST" action="<?= base_url('admin/berita/update/' . $post['slug']) ?>"
+                    enctype="multipart/form-data">
 
-        <?php if (!empty($post['thumbnail'])): ?>
-            <p>
-                <img src="/gow_tgl/public/uploads/<?= $post['thumbnail'] ?>" width="150">
-            </p>
-        <?php endif; ?>
+                    <!-- Judul -->
+                    <div class="mb-4">
+                        <label for="title" class="form-label fw-semibold">Judul Berita</label>
+                        <input type="text" class="form-control" id="title" name="title"
+                            value="<?= htmlspecialchars($post['title']) ?>" required>
+                    </div>
 
-        <button type="submit">Update</button>
+                    <!-- Penulis -->
+                    <div class="mb-4">
+                        <label for="author" class="form-label fw-semibold">Penulis</label>
+                        <input type="text" class="form-control" id="author" name="author"
+                            value="<?= htmlspecialchars($post['author']) ?>" required>
+                    </div>
 
-    </form>
+                    <!-- Thumbnail -->
+                    <div class="mb-4">
+                        <label for="thumbnail" class="form-label fw-semibold">Thumbnail</label>
+                        <input type="file" class="form-control" id="thumbnail" name="thumbnail">
+                        <small class="text-muted">
+                            Kosongkan jika tidak ingin mengganti gambar
+                        </small>
+                    </div>
+
+                    <!-- Caption Thumbnail -->
+                    <div class="mb-4">
+                        <label for="thumbnail_caption" class="form-label fw-semibold">
+                            Deskripsi Gambar
+                        </label>
+                        <input type="text" class="form-control" id="thumbnail_caption" name="thumbnail_caption"
+                            value="<?= htmlspecialchars($post['thumbnail_caption'] ?? '') ?>"
+                            placeholder="Contoh: Kegiatan rapat GOW Kota Tegal">
+                        <small class="text-muted">
+                            Teks kecil di bawah gambar
+                        </small>
+                    </div>
+
+                    <!-- Isi -->
+                    <div class="mb-5">
+                        <label for="content" class="form-label fw-semibold">Isi Berita</label>
+                        <textarea class="form-control" id="content" name="content"
+                            required><?= htmlspecialchars($post['content']) ?></textarea>
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div class="d-flex gap-3">
+                        <button type="submit" class="btn btn-success">
+                            <i class="bi bi-save me-1"></i> Update Berita
+                        </button>
+                        <a href="<?= base_url('admin/berita') ?>" class="btn btn-outline-secondary">
+                            <i class="bi bi-arrow-left"></i> Kembali
+                        </a>
+                    </div>
+
+                </form>
+
+            </div>
+        </div>
+
+    </div>
 
 </body>
 

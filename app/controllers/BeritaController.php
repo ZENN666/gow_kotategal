@@ -6,7 +6,7 @@ class BeritaController
         global $pdo;
 
         $stmt = $pdo->query(
-            "SELECT id, title, author, slug, thumbnail, content, created_at
+            "SELECT  id, title, author, slug, thumbnail, thumbnail_caption, content, created_at
 FROM berita
 ORDER BY created_at DESC"
         );
@@ -22,7 +22,7 @@ ORDER BY created_at DESC"
         global $pdo;
 
         $stmt = $pdo->prepare(
-            "SELECT id, title, author, slug, thumbnail, content, created_at
+            "SELECT  id, title, author, slug, thumbnail, thumbnail_caption, content, created_at
 FROM berita
 WHERE slug = :slug
 LIMIT 1"

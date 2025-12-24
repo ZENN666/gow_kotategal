@@ -3,7 +3,17 @@ $title = 'Berita GOW Kota Tegal';
 ob_start();
 ?>
 
-<section class="py-5 bg-light">
+<!-- OFFSET karena navbar fixed -->
+<style>
+    .page-offset {
+        padding-top: 140px;
+    }
+</style>
+
+<!-- NAVBAR -->
+<?php include __DIR__ . '/../partials/navbar.php'; ?>
+
+<section class="py-5 bg-light page-offset">
     <div class="container">
         <h3 class="fw-bold mb-4">Berita & Artikel</h3>
 
@@ -22,7 +32,9 @@ ob_start();
                         <?php endif; ?>
 
                         <div class="card-body d-flex flex-column">
-                            <h5 class="card-title"><?= htmlspecialchars($post['title']) ?></h5>
+                            <h5 class="card-title">
+                                <?= htmlspecialchars($post['title']) ?>
+                            </h5>
 
                             <p class="card-text text-muted flex-grow-1">
                                 <?= htmlspecialchars(
@@ -31,7 +43,7 @@ ob_start();
                             </p>
 
                             <a href="<?= base_url('berita/' . $post['slug']) ?>"
-                                class="btn btn-sm btn-outline-primary mt-auto">
+                                class="btn btn-sm btn-outline-warning mt-auto">
                                 Baca Selengkapnya
                             </a>
                         </div>

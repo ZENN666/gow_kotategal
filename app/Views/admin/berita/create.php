@@ -5,82 +5,126 @@
     <meta charset="UTF-8">
     <title>Tambah Berita</title>
 
-    <!-- Bootstrap 5 CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <style>
+        body {
+            background-color: #f5f6fa;
+        }
+
+        /* App Bar */
+        .app-bar {
+            background-color: #ff7f00;
+            color: #fff;
+            padding: 16px 24px;
+            margin-bottom: 20px;
+        }
+
+        .app-bar h4 {
+            margin: 0;
+            font-weight: 600;
+        }
+
+        .card {
+            border: none;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        textarea#content {
+            min-height: 300px;
+            resize: vertical;
+        }
+    </style>
 </head>
 
-<body class="bg-light">
+<body>
 
-    <div class="container py-5">
-        <div class="row justify-content-center">
-            <div class="col-lg-8 col-md-10">
+    <!-- App Bar -->
+    <div class="app-bar">
+        <h4>Kelola Berita</h4>
+    </div>
 
-                <div class="card border-0 shadow-lg rounded-4">
+    <div class="container-fluid px-4 pb-4">
 
-                    <!-- Card Header -->
-                    <div class="card-header text-white text-center rounded-top-4"
-                        style="background: linear-gradient(135deg, #0d6efd, #0b5ed7);">
-                        <h3 class="mb-0 fw-semibold">
-                            <i class="bi bi-newspaper"></i> Tambah Berita
-                        </h3>
+        <!-- Breadcrumb -->
+        <nav aria-label="breadcrumb" class="mb-3">
+            <ol class="breadcrumb mb-0">
+                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                <li class="breadcrumb-item">
+                    <a href="<?= base_url('admin/berita') ?>">Kelola Berita</a>
+                </li>
+                <li class="breadcrumb-item active">Tambah Berita</li>
+            </ol>
+        </nav>
+
+        <!-- Header -->
+        <div class="mb-3">
+            <h5 class="mb-0">Tambah Berita</h5>
+        </div>
+
+        <!-- Card -->
+        <div class="card">
+            <div class="card-body">
+
+                <form method="POST" action="<?= BASE_PATH ?>/admin/berita/store" enctype="multipart/form-data">
+
+                    <!-- Judul -->
+                    <div class="mb-4">
+                        <label for="title" class="form-label fw-semibold">Judul Berita</label>
+                        <input type="text" class="form-control" id="title" name="title" placeholder="Judul Berita"
+                            required>
                     </div>
 
-                    <!-- Card Body -->
-                    <div class="card-body p-4 p-md-5 bg-white">
-                        <form method="POST" action="<?= BASE_PATH ?>/admin/berita/store" enctype="multipart/form-data">
-
-                            <!-- Judul -->
-                            <div class="form-floating mb-4">
-                                <input type="text" class="form-control" id="title" name="title"
-                                    placeholder="Judul Berita" required>
-                                <label for="title">Judul Berita</label>
-                            </div>
-
-                            <!-- Penulis -->
-                            <div class="form-floating mb-4">
-                                <input type="text" class="form-control" id="author" name="author" placeholder="Penulis"
-                                    required>
-                                <label for="author">Penulis</label>
-                            </div>
-
-                            <!-- Thumbnail -->
-                            <div class="mb-4">
-                                <label for="thumbnail" class="form-label fw-semibold">Thumbnail</label>
-                                <input type="file" class="form-control" id="thumbnail" name="thumbnail">
-                                <small class="text-muted">JPG / PNG, max 2MB</small>
-                            </div>
-
-                            <!-- Isi -->
-                            <div class="mb-5">
-                                <label for="content" class="form-label fw-semibold">Isi Berita</label>
-                                <textarea class="form-control" id="content" name="content" rows="10"
-                                    placeholder="Tulis isi berita di sini..." required></textarea>
-                            </div>
-
-                            <!-- Action Buttons -->
-                            <div class="d-flex gap-3">
-                                <button type="submit" class="btn btn-success px-4">
-                                    <i class="bi bi-save me-1"></i> Simpan Berita
-                                </button>
-                                <a href="<?= BASE_PATH ?>/admin/berita" class="btn btn-outline-secondary px-4">
-                                    <i class="bi bi-arrow-left"></i> Kembali
-                                </a>
-                            </div>
-
-                        </form>
+                    <!-- Penulis -->
+                    <div class="mb-4">
+                        <label for="author" class="form-label fw-semibold">Penulis</label>
+                        <input type="text" class="form-control" id="author" name="author" placeholder="Nama Penulis"
+                            required>
                     </div>
 
-                </div>
+                    <!-- Thumbnail -->
+                    <div class="mb-4">
+                        <label for="thumbnail" class="form-label fw-semibold">Thumbnail</label>
+                        <input type="file" class="form-control" id="thumbnail" name="thumbnail">
+                        <small class="text-muted">JPG / PNG, max 2MB</small>
+                    </div>
+
+                    <!-- Caption Thumbnail -->
+                    <div class="mb-4">
+                        <label for="thumbnail_caption" class="form-label fw-semibold">
+                            Deskripsi Gambar
+                        </label>
+                        <input type="text" class="form-control" id="thumbnail_caption" name="thumbnail_caption"
+                            placeholder="Contoh: Kegiatan rapat GOW Kota Tegal">
+                        <small class="text-muted">
+                            Teks kecil di bawah gambar (opsional)
+                        </small>
+                    </div>
+
+                    <!-- Isi -->
+                    <div class="mb-5">
+                        <label for="content" class="form-label fw-semibold">Isi Berita</label>
+                        <textarea class="form-control" id="content" name="content"
+                            placeholder="Tulis isi berita di sini..." required></textarea>
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div class="d-flex gap-3">
+                        <button type="submit" class="btn btn-success">
+                            <i class="bi bi-save me-1"></i> Simpan Berita
+                        </button>
+                        <a href="<?= base_url('admin/berita') ?>" class="btn btn-outline-secondary">
+                            <i class="bi bi-arrow-left"></i> Kembali
+                        </a>
+                    </div>
+
+                </form>
 
             </div>
         </div>
-    </div>
 
-    <!-- Bootstrap 5 JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    </div>
 
 </body>
 

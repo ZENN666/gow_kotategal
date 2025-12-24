@@ -74,13 +74,18 @@ ob_start();
                         </ul>
                     </div>
                 </div>
-
                 <?php if (!empty($post['thumbnail'])): ?>
                     <div class="mb-4">
-                        <div class="ratio ratio-16x9">
+                        <div class="ratio ratio-16x9 mb-1">
                             <img src="<?= $og_img ?>" alt="<?= htmlspecialchars($post['title']) ?>" class="w-100"
                                 style="object-fit: cover;">
                         </div>
+
+                        <?php if (!empty($post['thumbnail_caption'])): ?>
+                            <small class="text-muted d-block">
+                                <?= htmlspecialchars($post['thumbnail_caption']) ?>
+                            </small>
+                        <?php endif; ?>
                     </div>
                 <?php endif; ?>
 
