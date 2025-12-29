@@ -1,122 +1,134 @@
 /* =========================
-   GOW BRAND VARIABLES
+   GLOBAL VARIABLES & RESET
 ========================= */
 :root {
-  --gow-orange: #ff7f00;       /* warna utama navbar & highlight */
-  --gow-orange-dark: #e65c00;  /* warna hover/tombol lebih gelap */
+  --gow-orange: #ff7f00;       /* Warna Utama */
+  --gow-orange-dark: #e65c00;  /* Warna Hover */
   --gow-gray: #64748b;
+  --gow-font-primary: 'Roboto', sans-serif;
+  --gow-font-nav: 'Inter', sans-serif;
 }
 
-/* =========================
-   GLOBAL
-========================= */
 body {
-  font-family: 'Poppins', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: var(--gow-font-primary);
   color: #1f2937;
-  background-color: #ffffff;
+  background-color: #fff;
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-}
-
-h1, h2, h3, h4, h5 {
-  font-weight: 700;
+  margin: 0;
 }
 
 main {
   flex: 1 0 auto;
 }
 
-/* =========================
-   NAVBAR (APP BAR STYLE)
-========================= */
-.gow-navbar {
-  background-color: var(--gow-orange) !important;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-}
-
-.gow-navbar .navbar-brand {
-  color: #ffffff !important;
+h1, h2, h3, h4, h5 {
   font-weight: 700;
 }
 
-.gow-navbar .navbar-brand:hover {
-  color: #fff8e6 !important;
+a {
+  text-decoration: none;
+}
+
+/* =========================
+   NAVBAR (GLASSMORPHISM STYLE)
+========================= */
+.gow-navbar-wrapper {
+  position: fixed;
+  top: 16px;
+  left: 0;
+  width: 100%;
+  z-index: 999;
+  pointer-events: none; /* Biar klik tembus di area kosong */
+}
+
+.gow-navbar {
+  pointer-events: auto; /* Aktifkan klik di navbar */
+  max-width: 1100px;
+  margin: auto;
+  background: rgba(255, 255, 255, 0.35); /* Transparan */
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 24px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  padding: 10px 24px;
+}
+
+.gow-navbar .navbar-brand {
+    font-weight: 700;
+    color: #000; /* Warna brand text */
 }
 
 .gow-navbar .nav-link {
-  color: #ffffff !important;
-  font-weight: 500;
+  font-family: var(--gow-font-nav);
+  font-weight: 530;
+  color: #222;
+  margin: 0 6px;
+  transition: color 0.3s ease;
 }
 
-.gow-navbar .nav-link:hover {
-  color: #fff8e6 !important;
-}
-
+.gow-navbar .nav-link:hover,
 .gow-navbar .nav-link.active {
-  color: #ffffff !important;
-  font-weight: 600;
-}
-
-.gow-navbar .navbar-toggler {
-  border-color: rgba(255,255,255,0.7);
-}
-
-.gow-navbar .navbar-toggler-icon {
-  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(255,255,255,0.9)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+  color: var(--gow-orange);
 }
 
 /* =========================
-   BUTTON (BOOTSTRAP 5 OVERRIDE)
+   MOBILE NAVBAR TWEAK (TRANSPARENT DROPDOWN)
 ========================= */
-.btn-primary {
-  --bs-btn-bg: var(--gow-orange);
-  --bs-btn-border-color: var(--gow-orange);
-  --bs-btn-hover-bg: var(--gow-orange-dark);
-  --bs-btn-hover-border-color: var(--gow-orange-dark);
-  --bs-btn-active-bg: var(--gow-orange-dark);
-  --bs-btn-active-border-color: var(--gow-orange-dark);
-  --bs-btn-focus-shadow-rgb: 255,127,0;
-}
+@media (max-width: 991px) {
+  .gow-navbar {
+    /* 1. Background Induk Transparan (Glass Effect) */
+    background: rgba(255, 255, 255, 0.45) !important; 
+    
+    /* Blur diperkuat biar tulisan menu tetap terbaca */
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
 
-.btn-outline-primary {
-  --bs-btn-color: var(--gow-orange);
-  --bs-btn-border-color: var(--gow-orange);
-  --bs-btn-hover-bg: var(--gow-orange);
-  --bs-btn-hover-border-color: var(--gow-orange);
-  --bs-btn-hover-color: #ffffff;
-  --bs-btn-focus-shadow-rgb: 255,127,0;
-}
+    border-radius: 20px; /* Sedikit lebih kotak biar muat menu */
+    padding: 12px 20px;
+    max-width: 95%;
+    
+    /* Border halus biar kelihatan batasnya */
+    border: 1px solid rgba(255, 255, 255, 0.3);
+  }
+  
+  /* 2. AREA DROPDOWN MENU */
+  .navbar-collapse {
+      /* PENTING: Background TRANSPARAN biar nyatu sama navbar induk */
+      background: transparent !important; 
+      
+      margin-top: 15px;
+      padding-top: 10px;
+      /* Garis pemisah halus antara logo dan menu drop down */
+      border-top: 1px solid rgba(255, 255, 255, 0.3);
+  }
 
-/* =========================
-   CARD
-========================= */
-.card {
-  border: none;
-  border-radius: 14px;
-  transition: all 0.3s ease;
-}
+  .brand-text {
+      display: none;
+  }
 
-.card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
-}
+  /* Styling Item Menu Mobile */
+  .navbar-nav .nav-link {
+      color: #111 !important; /* Warna teks gelap pekat biar kontras */
+      font-weight: 600;
+      padding: 10px 5px;
+      border-bottom: 1px dashed rgba(0,0,0,0.05); /* Garis putus-putus tipis */
+  }
 
-.card-title {
-  font-weight: 600;
+  .navbar-nav .nav-link:hover {
+      color: var(--gow-orange) !important;
+      padding-left: 10px; /* Efek geser dikit pas disentuh */
+      transition: all 0.3s;
+  }
+  
+  /* Tombol CTA (Kontak) di Mobile */
+  .btn-outline-warning {
+      width: 100%;
+      margin-top: 10px;
+      background: rgba(255, 127, 0, 0.1);
+  }
 }
-
-/* =========================
-   HERO
-========================= */
-.hero {
-  background: linear-gradient(
-    135deg,
-    rgba(255, 127, 0, 0.08),
-    rgba(255, 127, 0, 0.02)
-  );
-}
-
 /* =========================
    FOOTER
 ========================= */
@@ -124,13 +136,14 @@ footer {
   background-color: #0f172a;
   color: #cbd5f5;
   flex-shrink: 0;
-  padding: 1.5rem 0;
+  padding: 2rem 0;
   text-align: center;
+  margin-top: auto;
 }
 
 footer a {
   color: #cbd5f5;
-  text-decoration: none;
+  transition: color 0.2s;
 }
 
 footer a:hover {
@@ -138,79 +151,35 @@ footer a:hover {
 }
 
 /* =========================
-   PAGINATION
+   GLOBAL COMPONENTS
 ========================= */
+/* Card Styling */
+.card {
+  border: none;
+  border-radius: 14px;
+  transition: all 0.3s ease;
+  background: #fff;
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+}
+
+/* Button Warning (Orange Theme) Override */
+.btn-outline-warning {
+    --bs-btn-color: var(--gow-orange);
+    --bs-btn-border-color: var(--gow-orange);
+    --bs-btn-hover-color: #fff;
+    --bs-btn-hover-bg: var(--gow-orange);
+    --bs-btn-hover-border-color: var(--gow-orange);
+    border-radius: 50px;
+    font-weight: 500;
+}
+
+/* Pagination */
 .pagination {
   --bs-pagination-color: var(--gow-orange);
-  --bs-pagination-border-color: #e5e7eb;
-  --bs-pagination-hover-color: #fff;
-  --bs-pagination-hover-bg: var(--gow-orange);
-  --bs-pagination-hover-border-color: var(--gow-orange);
-  --bs-pagination-active-color: #fff;
   --bs-pagination-active-bg: var(--gow-orange);
   --bs-pagination-active-border-color: var(--gow-orange);
-  --bs-pagination-disabled-color: #94a3b8;
-  --bs-pagination-disabled-bg: #f8fafc;
-  --bs-pagination-disabled-border-color: #e5e7eb;
-}
-
-.page-link { 
-  border-radius: 8px;
-  font-weight: 500;
-  transition: all 0.2s ease;
-}
-
-/* =========================
-   SKELETON LOADER
-========================= */
-.skeleton {
-  background: linear-gradient(
-    100deg,
-    #e5e7eb 40%,
-    #f3f4f6 50%,
-    #e5e7eb 60%
-  );
-  background-size: 200% 100%;
-  animation: skeleton-loading 1.4s infinite;
-  border-radius: 8px;
-}
-
-@keyframes skeleton-loading {
-  to {
-    background-position-x: -200%;
-  }
-}
-
-.skeleton-img { height: 200px; width: 100%; }
-.skeleton-title { height: 18px; width: 80%; margin-bottom: 10px; }
-.skeleton-text { height: 14px; width: 100%; margin-bottom: 6px; }
-
-/* =========================
-   GALERI MODAL & CAROUSEL
-========================= */
-.modal-backdrop.show { opacity: 0.85; }
-.modal-content.bg-dark { background-color: rgba(0,0,0,0.9) !important; border: none; }
-.carousel-item img { background-color: transparent; }
-
-.btn-close-white { filter: invert(1); opacity: 0.8; }
-.btn-close-white:hover { opacity: 1; }
-
-#galleryCarousel { touch-action: pan-y; }
-#galleryCarousel .carousel-item { transition: transform 0.35s ease-in-out; }
-.modal-open { overflow: hidden; }
-.gallery-close { z-index: 1060; }
-
-/* Hero Image */
-.hero-image-wrapper {
-  width: 100%;
-}
-
-.hero-image-wrapper img {
-  width: 100%;
-  max-height: 380px;
-  object-fit: contain;
-}
-
-body {
-    padding-top: 80px;
 }

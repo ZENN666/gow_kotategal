@@ -19,8 +19,6 @@
             <!-- MENU (TAMBAH CLASS mobile-menu + tombol close) -->
             <div class="collapse navbar-collapse mobile-menu" id="navMenu">
 
-                <!-- CLOSE BUTTON (MOBILE ONLY) -->
-                <button class="btn-close ms-auto mb-4 d-lg-none" id="closeMenu"></button>
 
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-lg-center">
 

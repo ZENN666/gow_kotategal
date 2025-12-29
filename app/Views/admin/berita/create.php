@@ -98,7 +98,7 @@
                         <input type="text" class="form-control" id="thumbnail_caption" name="thumbnail_caption"
                             placeholder="Contoh: Kegiatan rapat GOW Kota Tegal">
                         <small class="text-muted">
-                            Teks kecil di bawah gambar (opsional)
+                            Teks deskripsi di bawah gambar (opsional)
                         </small>
                     </div>
 
@@ -112,7 +112,7 @@
                     <!-- Action Buttons -->
                     <div class="d-flex gap-3">
                         <button type="submit" class="btn btn-success">
-                            <i class="bi bi-save me-1"></i> Simpan Berita
+                            <i class="bi bi-save me-1"></i> Post Berita
                         </button>
                         <a href="<?= base_url('admin/berita') ?>" class="btn btn-outline-secondary">
                             <i class="bi bi-arrow-left"></i> Kembali

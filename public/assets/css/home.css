@@ -1,0 +1,211 @@
+/* ================= HERO SECTION ================= */
+.hero {
+    position: relative;
+    background: linear-gradient(120deg, rgba(255, 127, 0, 0.98), rgba(255, 167, 38, 0.95));
+    overflow: hidden;
+    min-height: unset;
+    padding-top: 160px;
+    padding-bottom: 110px;
+}
+
+/* Background Image Overlay */
+.hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    /* Pastikan path gambarnya benar relative terhadap file CSS ini */
+    /* "../img/" artinya keluar dari folder css, masuk ke folder img */
+    background-image: linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)), url("../img/banner.webp");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 70% 40%;
+    z-index: 0;
+}
+
+.hero > * {
+    position: relative;
+    z-index: 2;
+}
+
+/* Hero Content */
+.hero-content {
+    margin-top: -60px;
+    color: #fff;
+    max-width: 600px;
+}
+
+.hero small {
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 500;
+    opacity: .95;
+    text-shadow: 0 2px 6px rgba(0, 0, 0, .45);
+}
+
+.hero h1 {
+    font-size: clamp(2.2rem, 4vw, 3.5rem);
+    font-weight: 900;
+    line-height: 1.1;
+    text-shadow: 0 4px 14px rgba(0, 0, 0, .35);
+}
+
+.hero h1 span {
+    color: #ffd600;
+    text-shadow: 0 4px 14px rgba(0, 0, 0, .55);
+}
+
+.hero p {
+    font-size: 1.05rem;
+    opacity: .98;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, .5);
+}
+
+.btn-hero {
+    background: #ffd600;
+    color: #000;
+    border-radius: 50px;
+    padding: 12px 28px;
+    font-weight: 600;
+    border: none;
+}
+
+/* Hero Image Right */
+.hero-image img {
+    max-height: 480px;
+}
+
+/* Wave Decoration */
+.hero::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 100%;
+    height: 120px;
+    background: #fff;
+    clip-path: ellipse(70% 100% at 50% 100%);
+    z-index: 3;
+}
+
+/* Orange Shape Overlay Behind Image */
+.hero-shape-bg {
+    position: absolute;
+    top: -50%;
+    left: 65%;
+    transform: translateX(-60%);
+    height: 160%;
+    width: 70%;
+    max-width: 420px;
+    background: linear-gradient(180deg, rgba(255, 100, 0, 0.5) 0%, rgba(255, 60, 0, 0.2) 100%);
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
+    border-radius: 30px 30px 200px 200px;
+    z-index: 1;
+    pointer-events: none;
+}
+
+/* Animation Slide Up */
+@keyframes slideUpFade {
+    0% { opacity: 0; transform: translateY(150px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+.hero-animate-img {
+    animation: slideUpFade 1.2s ease-out forwards;
+}
+
+/* ================= STATS SECTION ================= */
+.stats {
+    background: rgba(255, 255, 255, 0.45);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 24px;
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    padding: 28px 36px;
+    max-width: 750px;
+    margin-top: -150px;
+    margin-left: 0;
+    margin-right: auto;
+    position: relative;
+    z-index: 3;
+}
+
+.stat-item { padding: 12px 22px; }
+.stat-item h2 { font-weight: 800; color: #ff7f00; margin-bottom: 4px; }
+.stat-item span { font-size: .85rem; font-weight: 600; letter-spacing: .5px; color: #222; }
+
+/* ================= WELCOME / SAMBUTAN ================= */
+.sambutan-section {
+    background-color: #fffaf5;
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+.sambutan-img-wrapper {
+    position: relative;
+    z-index: 1;
+    display: inline-block;
+    width: 100%;
+    max-width: 300px;
+}
+
+.sambutan-img-wrapper::before {
+    content: '';
+    position: absolute;
+    top: 10px;
+    left: 0;
+    width: 100%;
+    height: 95%;
+    background: linear-gradient(180deg, rgba(255, 127, 0, 0.1) 0%, rgba(255, 167, 38, 0.3) 100%);
+    border-radius: 150px 150px 20px 20px;
+    z-index: -1;
+}
+
+.sambutan-img {
+    width: 100%;
+    height: auto;
+    border-radius: 150px 150px 20px 20px;
+    border-bottom: 4px solid #ff7f00;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+.sambutan-content h2 { font-weight: 400; color: #333; margin-bottom: 0; text-transform: uppercase; font-size: 1.4rem; }
+.sambutan-content h3 { font-weight: 800; color: #880e4f; font-size: 1.7rem; margin-bottom: 15px; }
+.sambutan-text { color: #555; line-height: 1.6; font-size: 0.95rem; margin-bottom: 20px; text-align: justify; }
+.sambutan-name { font-weight: 800; color: #880e4f; font-size: 1.1rem; margin-bottom: 2px; }
+.sambutan-jabatan { font-size: 0.85rem; text-transform: uppercase; color: #777; letter-spacing: 1px; border-top: 1px solid #ddd; padding-top: 8px; display: inline-block; }
+
+/* ================= PARTNER SECTION ================= */
+.partner-section { padding: 60px 0; background: #fff; border-bottom: 1px solid #eee; }
+.partner-title { text-align: center; margin-bottom: 40px; }
+.partner-title h3 { font-weight: 700; color: #333; }
+.logo-swiper { width: 100%; padding-top: 20px; padding-bottom: 20px; }
+.logo-swiper .swiper-slide { display: flex; justify-content: center; align-items: center; height: 100px; }
+.logo-item img { max-width: 100%; max-height: 80px; width: auto; height: auto; object-fit: contain; transition: all 0.3s ease; cursor: pointer; }
+.logo-item img:hover { transform: scale(1.1); }
+.logo-swiper .swiper-wrapper { transition-timing-function: linear; }
+
+/* ================= RESPONSIVE (MOBILE) HOME ================= */
+@media (max-width: 768px) {
+    /* Hero Adjustments */
+    .hero { padding-top: 170px !important; padding-bottom: 60px; }
+    .hero::before { background-image: linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.55)), url("../img/banner.webp"); }
+    .hero-content { margin-top: 0 !important; padding-bottom: 40px; }
+    .hero h1 { font-size: 2.2rem; }
+    .hero small { display: block; margin-bottom: 10px; font-size: 0.9rem; }
+    .hero-image { margin-top: 40px; text-align: center !important; }
+
+    /* Stats Adjustments */
+    .stats { max-width: 100%; margin-top: -60px; padding: 20px; }
+
+    /* Sambutan Adjustments */
+    .sambutan-section { padding-top: 30px; padding-bottom: 30px; }
+    .sambutan-img-wrapper { max-width: 200px; margin-left: 0; margin-right: auto; }
+    .sambutan-img-wrapper::before, .sambutan-img { border-radius: 100px 100px 15px 15px; }
+    .sambutan-content h3 { font-size: 1.5rem; }
+}
+
+@media (max-width: 991px) {
+    .hero-shape-bg { left: 55%; width: 85%; max-width: 400px; height: 110%; top: -5%; border-radius: 20px 20px 100px 100px; }
+}

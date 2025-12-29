@@ -3,11 +3,10 @@ $title = 'Berita GOW Kota Tegal';
 ob_start();
 ?>
 
-<style>
-    /* =========================
-       HERO (ABSOLUTE, NO GAP TOP)
-       ========================= */
+<link rel="stylesheet" href="<?= base_url('assets/css/style.css') ?>">
 
+<style>
+    /* PAGE SPECIFIC CSS: HERO BERITA */
     .page-hero {
         position: absolute;
         top: 0;
@@ -15,118 +14,128 @@ ob_start();
         width: 100%;
         height: 350px;
 
-        background:
-            linear-gradient(rgba(198, 35, 104, 0.78), rgba(198, 35, 104, 0.78)),
-            url("<?= base_url('assets/img/hero-berita.jpg') ?>");
+        /* Gradient */
+        background: linear-gradient(rgba(255, 140, 0, 0.5),
+                rgba(255, 100, 0, 1)), url("<?= base_url('assets/img/alun.webp') ?>");
+
         background-size: cover;
         background-position: center;
 
         display: flex;
-        align-items: center;
-        color: #fff;
 
+        /* --- PERUBAHAN DISINI --- */
+        /* Ganti 'center' jadi 'flex-end' biar teks turun ke bawah */
+        align-items: flex-end;
+
+        /* Kasih jarak dari bawah biar ga nempel banget sama border radius */
+        padding-bottom: 60px;
+        /* ------------------------ */
+
+        color: #fff;
         border-bottom-left-radius: 48px;
         border-bottom-right-radius: 48px;
         overflow: hidden;
-
         z-index: 1;
     }
 
     .page-hero h1 {
         font-size: 3rem;
         font-weight: 800;
+        text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        /* Opsional: Tambah margin bottom dikit jika perlu */
+        margin-bottom: 0;
     }
 
-    /* SPACER */
     .hero-spacer {
-        height: 420px;
+        height: 450px;
     }
 
-    /* CONTENT NAIK KE HERO */
     .content-section {
-        margin-top: -280px;
-        /* 🔥 PENGATUR JARAK */
-        padding-top: 120px;
+        margin-top: -250px;
+        padding-top: 80px;
     }
 
+    /* RESPONSIVE MOBILE */
     @media (max-width: 768px) {
         .page-hero {
             height: 320px;
             border-bottom-left-radius: 28px;
             border-bottom-right-radius: 28px;
+
+            /* Di HP jarak bawahnya dikurangin dikit */
+            padding-bottom: 40px;
         }
 
         .hero-spacer {
-            height: 320px;
+            height: 380px;
         }
 
         .content-section {
-            margin-top: -80px;
-            padding-top: 80px;
+            margin-top: -100px;
+            padding-top: 60px;
         }
 
         .page-hero h1 {
             font-size: 2rem;
+            text-align: center;
+            width: 100%;
+            /* Pastikan rata tengah rapi */
         }
     }
 </style>
 
-<!-- NAVBAR (TIDAK DISENTUH) -->
 <?php include __DIR__ . '/../partials/navbar.php'; ?>
 
-<!-- HERO -->
 <section class="page-hero">
     <div class="container">
-        <h1>Berita & Kegiatan</h1>
+        <h1>Berita & Informasi Terkini</h1>
     </div>
 </section>
 
-<!-- SPACER -->
 <div class="hero-spacer"></div>
 
-<!-- CONTENT -->
 <section class="py-5 bg-light content-section">
     <div class="container">
-
         <div class="row g-4">
             <?php if (empty($posts)): ?>
-                <p class="text-muted">Belum ada berita.</p>
+                <div class="col-12 text-center py-5">
+                    <p class="text-muted fs-5">Belum ada berita yang diterbitkan.</p>
+                </div>
             <?php endif; ?>
 
             <?php foreach ($posts as $post): ?>
                 <div class="col-md-4">
-                    <div class="card shadow-sm h-100">
-
+                    <div class="card shadow-sm h-100 border-0">
                         <?php if (!empty($post['thumbnail'])): ?>
-                            <img src="<?= base_url('uploads/' . $post['thumbnail']) ?>" class="card-img-top"
-                                style="height:200px;object-fit:cover;" alt="<?= htmlspecialchars($post['title']) ?>">
+                            <div class="overflow-hidden rounded-top">
+                                <img src="<?= base_url('uploads/' . $post['thumbnail']) ?>" class="card-img-top transition-zoom"
+                                    style="height:220px; object-fit:cover; transition: transform 0.3s ease;"
+                                    alt="<?= htmlspecialchars($post['title']) ?>">
+                            </div>
                         <?php endif; ?>
 
-                        <div class="card-body d-flex flex-column">
-                            <h5 class="card-title">
+                        <div class="card-body d-flex flex-column p-4">
+                            <h5 class="card-title fw-bold mb-3 text-dark">
                                 <?= htmlspecialchars($post['title']) ?>
                             </h5>
 
-                            <p class="card-text text-muted flex-grow-1">
-                                <?= htmlspecialchars(
-                                    mb_substr(strip_tags($post['content']), 0, 120)
-                                ) ?>…
+                            <p class="card-text text-muted flex-grow-1 small" style="line-height: 1.6;">
+                                <?= htmlspecialchars(mb_substr(strip_tags($post['content']), 0, 110)) ?>...
                             </p>
 
                             <a href="<?= base_url('berita/' . $post['slug']) ?>"
-                                class="btn btn-sm btn-outline-warning mt-auto">
+                                class="btn btn-outline-warning w-100 fw-bold mt-3 rounded-pill">
                                 Baca Selengkapnya
                             </a>
                         </div>
-
                     </div>
                 </div>
             <?php endforeach; ?>
         </div>
-
     </div>
 </section>
 
 <?php
 $content = ob_get_clean();
 require __DIR__ . '/../partials/layout.php';
+?>

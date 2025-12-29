@@ -36,17 +36,42 @@ class BeritaAdminController
         include __DIR__ . '/../Views/admin/berita/create.php';
     }
 
-    // ================= SIMPAN =================
+    // ================= SIMPAN (UPDATED - SEO FRIENDLY) =================
     public function store()
     {
         global $pdo;
 
         $title = trim($_POST['title']);
         $content = $_POST['content'];
-        $author = trim($_POST['author']); //jika author adalah admin maka $author = trim($_POST['author']);
+        $author = trim($_POST['author']);
         $thumbnail_caption = trim($_POST['thumbnail_caption'] ?? null);
 
-        $slug = strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $title))) . '-' . time();
+        // --- MULAI PERBAIKAN SLUG ---
+
+        // 1. Bersihin judul jadi slug dasar (huruf kecil, angka, dash)
+        $slug_base = strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $title)));
+        // Hapus dash berlebih (misal "judul---berita" jadi "judul-berita")
+        $slug_base = preg_replace('/-+/', '-', $slug_base);
+
+        $slug = $slug_base;
+        $counter = 1;
+
+        // 2. Cek apakah slug sudah ada di database
+        while (true) {
+            $stmt_check = $pdo->prepare("SELECT id FROM berita WHERE slug = ?");
+            $stmt_check->execute([$slug]);
+
+            // Kalau tidak ada duplikat (rowCount == 0), berarti aman, keluar loop
+            if ($stmt_check->rowCount() == 0) {
+                break;
+            }
+
+            // Kalau duplikat, tambahkan counter (contoh: judul-berita-1, judul-berita-2)
+            $slug = $slug_base . '-' . $counter;
+            $counter++;
+        }
+
+        // --- SELESAI PERBAIKAN SLUG ---
 
         // ================= UPLOAD THUMBNAIL =================
         $thumbnail = null;
@@ -69,7 +94,7 @@ class BeritaAdminController
         $stmt->execute([
             $title,
             $author,
-            $slug,
+            $slug, // Slug bersih yang akan masuk DB
             $content,
             $thumbnail,
             $thumbnail_caption
@@ -104,6 +129,9 @@ class BeritaAdminController
         $title = trim($_POST['title']);
         $content = $_POST['content'];
         $thumbnail_caption = trim($_POST['thumbnail_caption'] ?? null);
+
+        // Catatan: Biasanya slug tidak diubah saat update biar link lama gak mati (404).
+        // Jadi di sini gw biarin logic update-nya gak nyentuh kolom slug.
 
         // kalau upload thumbnail baru
         if (!empty($_FILES['thumbnail']['name'])) {
