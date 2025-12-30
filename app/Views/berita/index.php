@@ -13,24 +13,14 @@ ob_start();
         left: 0;
         width: 100%;
         height: 350px;
-
-        /* Gradient */
         background: linear-gradient(rgba(255, 140, 0, 0.5),
                 rgba(255, 100, 0, 1)), url("<?= base_url('assets/img/alun.webp') ?>");
-
         background-size: cover;
         background-position: center;
-
         display: flex;
-
-        /* --- PERUBAHAN DISINI --- */
-        /* Ganti 'center' jadi 'flex-end' biar teks turun ke bawah */
         align-items: flex-end;
-
-        /* Kasih jarak dari bawah biar ga nempel banget sama border radius */
+        /* Teks di bawah */
         padding-bottom: 60px;
-        /* ------------------------ */
-
         color: #fff;
         border-bottom-left-radius: 48px;
         border-bottom-right-radius: 48px;
@@ -42,7 +32,6 @@ ob_start();
         font-size: 3rem;
         font-weight: 800;
         text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-        /* Opsional: Tambah margin bottom dikit jika perlu */
         margin-bottom: 0;
     }
 
@@ -61,8 +50,6 @@ ob_start();
             height: 320px;
             border-bottom-left-radius: 28px;
             border-bottom-right-radius: 28px;
-
-            /* Di HP jarak bawahnya dikurangin dikit */
             padding-bottom: 40px;
         }
 
@@ -79,7 +66,6 @@ ob_start();
             font-size: 2rem;
             text-align: center;
             width: 100%;
-            /* Pastikan rata tengah rapi */
         }
     }
 </style>
@@ -115,6 +101,12 @@ ob_start();
                         <?php endif; ?>
 
                         <div class="card-body d-flex flex-column p-4">
+
+                            <div class="mb-2 text-muted small d-flex align-items-center">
+                                <i class="bi bi-calendar-event me-2 text-warning"></i>
+                                <span class="fw-medium"><?= tanggal_indonesia($post['created_at']) ?></span>
+                            </div>
+
                             <h5 class="card-title fw-bold mb-3 text-dark">
                                 <?= htmlspecialchars($post['title']) ?>
                             </h5>

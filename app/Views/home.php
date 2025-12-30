@@ -124,19 +124,37 @@
                 <h3 class="fw-bold">Berita & Informasi Terkini</h3>
                 <a href="<?= base_url('berita') ?>" class="btn btn-sm btn-outline-warning">Lihat Semua</a>
             </div>
+
             <div class="row g-4">
                 <?php foreach ($latestPosts as $post): ?>
                     <div class="col-md-4">
-                        <div class="card h-100">
-                            <img src="<?= base_url('uploads/' . $post['thumbnail']) ?>" class="card-img-top"
-                                style="height:220px;object-fit:cover;">
-                            <div class="card-body">
-                                <h5><?= htmlspecialchars($post['title']) ?></h5>
-                                <p class="text-muted">
-                                    <?= htmlspecialchars(mb_substr(strip_tags($post['content']), 0, 120)) ?>…
+                        <div class="card h-100 shadow-sm border-0">
+
+                            <div class="overflow-hidden rounded-top">
+                                <img src="<?= base_url('uploads/' . $post['thumbnail']) ?>" class="card-img-top"
+                                    style="height:220px; object-fit:cover;">
+                            </div>
+
+                            <div class="card-body p-4">
+
+                                <div class="mb-2 text-muted small d-flex align-items-center">
+                                    <i class="bi bi-calendar-event me-2 text-warning"></i>
+                                    <span><?= tanggal_indonesia($post['created_at']) ?></span>
+                                </div>
+
+                                <h5 class="fw-bold mb-3">
+                                    <a href="<?= base_url('berita/' . $post['slug']) ?>"
+                                        class="text-decoration-none text-dark">
+                                        <?= htmlspecialchars($post['title']) ?>
+                                    </a>
+                                </h5>
+
+                                <p class="text-muted small">
+                                    <?= htmlspecialchars(mb_substr(strip_tags($post['content']), 0, 100)) ?>...
                                 </p>
+
                                 <a href="<?= base_url('berita/' . $post['slug']) ?>"
-                                    class="btn btn-sm btn-outline-warning">Baca Selengkapnya</a>
+                                    class="btn btn-sm btn-outline-warning mt-auto">Baca Selengkapnya</a>
                             </div>
                         </div>
                     </div>
@@ -163,26 +181,40 @@
                 <?php else: ?>
                     <?php foreach ($upcomingAgendas as $agn): ?>
                         <div class="col-lg-4 col-md-6">
-                            <div class="d-flex bg-white rounded shadow-sm overflow-hidden h-100">
-                                <div class="bg-warning text-white p-3 d-flex flex-column justify-content-center align-items-center"
-                                    style="min-width: 90px;">
-                                    <span class="h2 fw-bold mb-0"><?= date('d', strtotime($agn['tanggal_mulai'])) ?></span>
-                                    <span class="small text-uppercase"><?= date('M', strtotime($agn['tanggal_mulai'])) ?></span>
+                            <div class="d-flex bg-white rounded shadow-sm overflow-hidden h-100 position-relative hover-effect">
+
+                                <?php $imgSrc = $agn['gambar'] ? base_url('uploads/' . $agn['gambar']) : base_url('assets/img/gow.webp'); ?>
+                                <div class="position-relative" style="min-width: 110px; width: 110px;">
+                                    <img src="<?= $imgSrc ?>" alt="Thumb" class="w-100 h-100 transition-zoom"
+                                        style="object-fit: cover;">
+
+                                    <div class="position-absolute top-0 start-0 bg-warning text-white text-center p-1 m-1 rounded shadow-sm"
+                                        style="min-width: 40px; line-height: 1;">
+                                        <span
+                                            class="d-block fw-bold fs-6"><?= date('d', strtotime($agn['tanggal_mulai'])) ?></span>
+                                        <small style="font-size: 0.6rem;"
+                                            class="text-uppercase"><?= date('M', strtotime($agn['tanggal_mulai'])) ?></small>
+                                    </div>
                                 </div>
-                                <div class="p-3 flex-grow-1">
-                                    <h6 class="fw-bold mb-1">
+
+                                <div class="p-3 flex-grow-1 d-flex flex-column justify-content-center">
+                                    <h6 class="fw-bold mb-1 lh-sm">
                                         <a href="<?= base_url('agenda/' . $agn['slug']) ?>"
-                                            class="text-dark text-decoration-none">
+                                            class="text-dark text-decoration-none stretched-link">
                                             <?= htmlspecialchars($agn['judul']) ?>
                                         </a>
                                     </h6>
-                                    <div class="text-muted small mb-2">
-                                        <i class="bi bi-clock me-1"></i> <?= date('H:i', strtotime($agn['waktu_mulai'])) ?> WIB
+
+                                    <div class="text-muted small mb-1 text-truncate">
+                                        <i class="bi bi-clock text-warning me-1"></i>
+                                        <?= date('H:i', strtotime($agn['waktu_mulai'])) ?> WIB
                                     </div>
+
                                     <div class="text-muted small text-truncate" style="max-width: 200px;">
-                                        <i class="bi bi-geo-alt me-1"></i> <?= htmlspecialchars($agn['lokasi']) ?>
+                                        <i class="bi bi-geo-alt text-danger me-1"></i> <?= htmlspecialchars($agn['lokasi']) ?>
                                     </div>
                                 </div>
+
                             </div>
                         </div>
                     <?php endforeach; ?>
@@ -191,6 +223,98 @@
         </div>
     </section>
 
+    <style>
+        /* Efek Zoom halus pas di hover */
+        .hover-effect:hover .transition-zoom {
+            transform: scale(1.1);
+        }
+
+        .transition-zoom {
+            transition: transform 0.4s ease;
+        }
+    </style>
+
+    <section class="py-5 bg-white overflow-hidden">
+        <div class="container py-lg-4">
+            <div class="row align-items-center g-5">
+
+                <div class="col-lg-6 order-2 order-lg-1">
+                    <h6 class="text-warning fw-bold text-uppercase mb-2" style="letter-spacing: 2px;">Tentang Kami</h6>
+                    <h2 class="display-6 fw-bold text-dark mb-4">
+                        LEBIH DEKAT DENGAN <br>
+                        <span style="color: #ff7f00;">GOW Kota Tegal</span>
+                    </h2>
+
+                    <p class="text-secondary lead mb-4" style="line-height: 1.8;">
+                        Sejak didirikan, Gabungan Organisasi Wanita (GOW) Kota Tegal berkomitmen menjadi wadah pemersatu
+                        bagi seluruh organisasi wanita untuk berkarya, berdaya, dan berkontribusi bagi kemajuan kota.
+                    </p>
+
+                    <p class="text-muted mb-4">
+                        Dengan semangat kebersamaan dan profesionalisme, kami bersinergi dengan pemerintah dan
+                        masyarakat untuk memastikan hak-hak perempuan terpenuhi, serta menciptakan generasi emas yang
+                        sehat dan cerdas di Kota Tegal.
+                    </p>
+
+                    <div class="p-4 rounded-3 mb-5 position-relative"
+                        style="background: linear-gradient(to right, #fff8e1 10%, rgba(255, 255, 255, 0) 100%); border-left: 5px solid #ff7f00;">
+                        <figure class="mb-0">
+                            <blockquote class="blockquote">
+                                <p class="mb-0 fw-bold fst-italic text-dark fs-6">
+                                    "Perempuan Berdaya, Keluarga Sejahtera.<br>
+                                    Bersama Kita Membangun Tegal yang Lebih Bermartabat."
+                                </p>
+                            </blockquote>
+                        </figure>
+                    </div>
+
+                    <div class="d-flex align-items-center gap-3">
+                        <span class="fw-bold text-uppercase text-muted small">Selengkapnya tentang Kami</span>
+                        <a href="<?= base_url('about') ?>"
+                            class="btn btn-warning rounded-circle text-white d-flex align-items-center justify-content-center shadow-sm hover-scale"
+                            style="width: 50px; height: 50px;">
+                            <i class="bi bi-arrow-right fs-4"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="col-lg-6 order-1 order-lg-2">
+                    <div class="row g-3">
+                        <div class="col-12">
+                            <img src="<?= base_url('assets/img/bersama.webp') ?>" alt="Kegiatan GOW Utama"
+                                class="img-fluid rounded-4 shadow-sm w-100 object-fit-cover" style="height: 300px;">
+                        </div>
+
+                        <div class="col-6">
+                            <img src="<?= base_url('assets/img/ttd.webp') ?>" alt="Kegiatan GOW 2"
+                                class="img-fluid rounded-4 shadow-sm w-100 object-fit-cover" style="height: 200px;">
+                        </div>
+                        <div class="col-6">
+                            <img src="<?= base_url('assets/img/pendopo.webp') ?>" alt="Kegiatan GOW 3"
+                                class="img-fluid rounded-4 shadow-sm w-100 object-fit-cover" style="height: 200px;">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <style>
+        .hover-scale {
+            transition: transform 0.3s ease;
+        }
+
+        .hover-scale:hover {
+            transform: scale(1.1);
+            background-color: #e67300 !important;
+            /* Warna oranye agak gelap pas hover */
+        }
+
+        .object-fit-cover {
+            object-fit: cover;
+        }
+    </style>
     <?php include __DIR__ . '/partials/footer.php'; ?>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>

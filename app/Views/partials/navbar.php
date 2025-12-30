@@ -22,7 +22,7 @@
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link fw-medium" href="<?= base_url('about') ?>">TENTANG GOW</a>
+                        <a class="nav-link fw-medium" href="<?= base_url('about') ?>">TENTANG KAMI</a>
                     </li>
 
                     <li class="nav-item">

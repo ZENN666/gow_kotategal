@@ -36,7 +36,6 @@ $share_text = "Jangan lewatkan kegiatan ini: " . $agenda['judul'];
             background-color: #fff;
             border: none;
             overflow: hidden;
-            /* Opsional: Batasi tinggi maksimal gambar biar ga terlalu panjang */
             max-height: 600px;
             display: flex;
             align-items: center;
@@ -47,7 +46,6 @@ $share_text = "Jangan lewatkan kegiatan ini: " . $agenda['judul'];
             width: 100%;
             height: 100%;
             object-fit: contain;
-            /* Pakai contain biar gambar utuh ga terpotong */
             display: block;
         }
 
@@ -83,7 +81,7 @@ $share_text = "Jangan lewatkan kegiatan ini: " . $agenda['judul'];
 
     <?php include __DIR__ . '/../partials/navbar.php'; ?>
 
-    <div class="container py-5 my-4">
+    <div class="container py-5 mb-5" style="margin-top: 100px;">
 
         <div class="mb-4">
             <a href="<?= base_url('agenda') ?>" class="text-decoration-none text-muted fw-bold">
@@ -130,11 +128,9 @@ $share_text = "Jangan lewatkan kegiatan ini: " . $agenda['judul'];
 
                     <div class="agenda-desc mb-4">
                         <h5 class="fw-bold fs-6 border-bottom pb-2 mb-3">Deskripsi :</h5>
-
                         <div class="text-secondary"
-                            style="white-space: pre-wrap; word-wrap: break-word; text-align: justify;">
-                            <?= htmlspecialchars(trim($agenda['deskripsi'])) ?>
-                        </div>
+                            style="white-space: pre-wrap; word-wrap: break-word; text-align: justify; margin-top:0;">
+                            <?= htmlspecialchars(preg_replace('/^\s+|\s+$/u', '', $agenda['deskripsi'])) ?></div>
                     </div>
 
                     <div class="pt-3 border-top">
