@@ -183,3 +183,81 @@ footer a:hover {
   --bs-pagination-active-bg: var(--gow-orange);
   --bs-pagination-active-border-color: var(--gow-orange);
 }
+
+/* ===========================
+   Contact Info Section Styles
+   =========================== */
+
+.contact-info-section {
+    background-color: #FFF5E6; /* Oranye pastel muda */
+    padding: 60px 0;
+    border-top: 4px solid #EF6C00; /* Aksen garis oranye di atas */
+    color: #333;
+}
+
+.contact-logo {
+    max-width: 160px; /* Ukuran logo dirapikan */
+    height: auto;
+    /* Agar logo visualnya sejajar dengan teks heading di sebelah */
+    margin-top: -5px; 
+}
+
+.contact-heading {
+    font-family: 'Roboto', sans-serif;
+    color: #D84315; /* Oranye tua */
+    font-weight: 800; /* Lebih tebal */
+    font-size: 1.1rem;
+    margin-bottom: 15px; /* Jarak ke isi konten */
+    margin-top: 0; /* Pastikan tidak ada margin atas */
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.contact-text, 
+.contact-details li {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: #444;
+    margin-bottom: 8px;
+}
+
+.contact-details strong {
+    color: #000;
+    font-weight: 600;
+}
+
+/* Social Media Icons */
+.social-icons {
+    display: flex;
+    gap: 12px;
+    justify-content: center; /* Default tengah (HP) */
+}
+
+@media (min-width: 992px) {
+    .social-icons {
+        justify-content: flex-start; /* Kiri (Desktop) */
+    }
+    .contact-logo {
+        margin-bottom: 0;
+    }
+}
+
+.social-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background-color: #EF6C00;
+    color: #fff;
+    border-radius: 50%;
+    text-decoration: none;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+}
+
+.social-btn:hover {
+    background-color: #bf360c;
+    transform: translateY(-3px);
+    color: #fff;
+}

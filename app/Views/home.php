@@ -6,12 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>GOW Kota Tegal | Website Resmi</title>
 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 
     <link rel="stylesheet" href="<?= base_url('assets/css/style.css') ?>">
-
     <link rel="stylesheet" href="<?= base_url('assets/css/home.css') ?>">
 </head>
 
@@ -37,7 +37,6 @@
             </div>
         </div>
     </section>
-
 
     <section class="container-fluid px-0">
         <div class="container">
@@ -84,7 +83,6 @@
         </div>
     </section>
 
-
     <section class="partner-section">
         <div class="container">
             <div class="partner-title">
@@ -94,14 +92,14 @@
             <div class="swiper logo-swiper">
                 <div class="swiper-wrapper align-items-center">
                     <div class="swiper-slide">
-                        <div class="logo-item"><img src="<?= base_url('assets/img/hwk.png') ?>" alt="HWK"></div>
+                        <div class="logo-item"><img src="<?= base_url('assets/img/hwk.webp') ?>" alt="HWK"></div>
                     </div>
                     <div class="swiper-slide">
-                        <div class="logo-item"><img src="<?= base_url('assets/img/iwapi.png') ?>" alt="IWAPI"></div>
+                        <div class="logo-item"><img src="<?= base_url('assets/img/iwapi.webp') ?>" alt="IWAPI"></div>
                     </div>
                     <div class="swiper-slide">
-                        <div class="logo-item"><img src="<?= base_url('assets/img/muslimat-nu.png') ?>"
-                                alt="Muslimat NU"></div>
+                        <div class="logo-item"><img src="<?= base_url('assets/img/muslimat.webp') ?>" alt="Muslimat NU">
+                        </div>
                     </div>
                     <div class="swiper-slide">
                         <div class="logo-item"><img src="<?= base_url('assets/img/wis.png') ?>" alt="WIS"></div>
@@ -113,14 +111,12 @@
                         <div class="logo-item"><img src="<?= base_url('assets/img/bnn.webp') ?>" alt="BNN"></div>
                     </div>
                     <div class="swiper-slide">
-                        <div class="logo-item"><img src="https://via.placeholder.com/150x80/eee/999?text=Salimah"
-                                alt="Partner"></div>
+                        <div class="logo-item"><img src="<?= base_url('assets/img/pemkot.webp') ?>" alt="PEMKOT"></div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-
 
     <section class="py-5 mt-5">
         <div class="container">
@@ -149,38 +145,68 @@
         </div>
     </section>
 
+    <section class="contact-info-section">
+        <div class="container">
+            <div class="row align-items-start">
+
+                <div class="col-lg-3 col-md-12 mb-4 mb-lg-0 text-center text-lg-start">
+                    <img src="<?= base_url('assets/img/gow.webp') ?>" alt="Logo GOW" class="contact-logo img-fluid">
+                </div>
+
+                <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
+                    <h5 class="contact-heading">ALAMAT</h5>
+                    <p class="contact-text">
+                        Jl. Kartini No. 123, Mangkukusuman,<br>
+                        Kec. Tegal Timur, Kota Tegal,<br>
+                        Jawa Tengah 52123
+                    </p>
+                </div>
+
+                <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
+                    <h5 class="contact-heading">INFORMASI KONTAK</h5>
+                    <ul class="list-unstyled contact-details">
+                        <li><strong>Telepon :</strong> (0283) 123456</li>
+                        <li><strong>Email :</strong> info@gowkotategal.org</li>
+                        <li><strong>Layanan :</strong> Senin - Jumat (08:00 - 16:00 WIB)</li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-3 col-md-12 text-center text-lg-start">
+                    <h5 class="contact-heading">SOSIAL MEDIA</h5>
+                    <div class="social-icons mt-3">
+
+                        <a href="<?= base_url('coming-soon') ?>" target="_blank" class="social-btn"
+                            aria-label="LinkedIn">
+                            <i class="bi bi-linkedin"></i>
+                        </a>
+
+                        <a href="<?= base_url('coming-soon') ?>" target="_blank" class="social-btn"
+                            aria-label="Facebook">
+                            <i class="bi bi-facebook"></i>
+                        </a>
+
+                        <a href="https://www.instagram.com/" target="_blank" class="social-btn" aria-label="Instagram">
+                            <i class="bi bi-instagram"></i>
+                        </a>
+
+                        <a href="<?= base_url('coming-soon') ?>" target="_blank" class="social-btn">
+                            <i class="bi bi-youtube"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+    ```
+
     <?php include __DIR__ . '/partials/footer.php'; ?>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            // Stats Counter Logic
-            const counters = document.querySelectorAll(".count-up");
-            const duration = 1500;
-            counters.forEach(counter => {
-                const target = parseInt(counter.getAttribute("data-count"), 10);
-                let startTime = null;
-                function animateCount(timestamp) {
-                    if (!startTime) startTime = timestamp;
-                    const progress = Math.min((timestamp - startTime) / duration, 1);
-                    const current = Math.floor(progress * target);
-                    counter.innerText = current + "+";
-                    if (progress < 1) requestAnimationFrame(animateCount);
-                    else counter.innerText = target + "+";
-                }
-                requestAnimationFrame(animateCount);
-            });
-
-            // Swiper Logic
-            var swiperLogo = new Swiper(".logo-swiper", {
-                slidesPerView: 2, spaceBetween: 20, loop: true, grabCursor: true, speed: 4000,
-                autoplay: { delay: 0, disableOnInteraction: false, pauseOnMouseEnter: true },
-                breakpoints: { 576: { slidesPerView: 3, spaceBetween: 30 }, 768: { slidesPerView: 4, spaceBetween: 40 }, 1024: { slidesPerView: 5, spaceBetween: 50 }, 1200: { slidesPerView: 6, spaceBetween: 60 } }
-            });
-        });
-    </script>
+    <script src="<?= base_url('assets/js/home.js') ?>"></script>
 </body>
 
 </html>

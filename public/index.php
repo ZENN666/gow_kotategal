@@ -41,6 +41,8 @@ $router->get('#^visimisi$#', fn() => $pages->visimisi());
 $router->get('#^struktur$#', fn() => $pages->struktur());
 $router->get('#^galeri$#', fn() => $pages->galeri());
 $router->get('#^kontak$#', fn() => $pages->kontak());
+$router->get('#^coming-soon$#', fn() => $pages->comingSoon());
+
 
 // ================= AUTH ADMIN =================
 

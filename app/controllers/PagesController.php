@@ -31,4 +31,12 @@ class PagesController
     {
         require_once __DIR__ . '/../Views/home.php';
     }
+
+    public function comingSoon()
+    {
+        // Pastikan path-nya sesuai dengan letak file view lu
+        // Karena ini PHP native custom, biasanya pake include/require
+        require_once __DIR__ . '/../views/coming_soon.php';
+    }
 }
+
