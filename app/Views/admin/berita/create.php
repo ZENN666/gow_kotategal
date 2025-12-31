@@ -215,7 +215,7 @@
                             Batal
                         </a>
                         <button type="submit" class="btn btn-success px-4">
-                            <i class="bi bi-save me-1"></i> Simpan Berita
+                            <i class="bi bi-save me-1"></i> Post Berita
                         </button>
                     </div>
 

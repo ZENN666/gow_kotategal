@@ -87,10 +87,6 @@
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link fw-medium" href="<?= base_url('galeri') ?>">GALERI</a>
-                    </li>
-
-                    <li class="nav-item">
                         <a class="nav-link fw-medium" href="<?= base_url('kontak') ?>">KONTAK</a>
                     </li>
 

@@ -45,10 +45,10 @@
                     <h2 class="count-up" data-count="29">0+</h2><span>ORGANISASI</span>
                 </div>
                 <div class="col-md col-6 stat-item">
-                    <h2 class="count-up" data-count="500">0+</h2><span>CABANG</span>
+                    <h2 class="count-up" data-count="50">0+</h2><span>PROGRAM KERJA</span>
                 </div>
                 <div class="col-md col-6 stat-item">
-                    <h2 class="count-up" data-count="100">0+</h2><span>ANGGOTA</span>
+                    <h2 class="count-up" data-count="500">0+</h2><span>KADER PENGGERAK</span>
                 </div>
             </div>
         </div>

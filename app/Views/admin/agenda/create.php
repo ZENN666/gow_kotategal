@@ -226,7 +226,7 @@
                     <div class="d-flex gap-2 justify-content-end">
                         <a href="<?= base_url('admin/agenda') ?>" class="btn btn-light border">Batal</a>
                         <button type="submit" class="btn btn-success px-4">
-                            <i class="bi bi-save me-1"></i> Simpan Agenda
+                            <i class="bi bi-save me-1"></i> Simpan
                         </button>
                     </div>
 

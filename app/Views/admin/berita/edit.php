@@ -188,6 +188,19 @@
                             <input type="text" class="form-control" id="author" name="author"
                                 value="<?= htmlspecialchars($post['author']) ?>" required>
                         </div>
+
+                        <div class="col-md-6 mb-4">
+                            <label for="created_at" class="form-label fw-semibold">Tanggal & Jam Tayang</label>
+                            <?php
+                            // Format tanggal database (YYYY-MM-DD HH:MM:SS) menjadi format input HTML5 (YYYY-MM-DDTHH:MM)
+                            $dateValue = date('Y-m-d\TH:i', strtotime($post['created_at']));
+                            ?>
+                            <input type="datetime-local" class="form-control" id="created_at" name="created_at"
+                                value="<?= $dateValue ?>" required>
+                        </div>
+                    </div>
+
+                    <div class="row">
                         <div class="col-md-6 mb-4">
                             <label for="thumbnail" class="form-label fw-semibold">Ganti Gambar Utama</label>
                             <input type="file" class="form-control" id="thumbnail" name="thumbnail">
@@ -195,13 +208,13 @@
                                 Kosongkan jika tidak ingin mengganti gambar
                             </small>
                         </div>
-                    </div>
-
-                    <div class="mb-4">
-                        <label for="thumbnail_caption" class="form-label fw-semibold">Deskripsi Gambar (Caption)</label>
-                        <input type="text" class="form-control" id="thumbnail_caption" name="thumbnail_caption"
-                            value="<?= htmlspecialchars($post['thumbnail_caption'] ?? '') ?>"
-                            placeholder="Contoh: Kegiatan rapat koordinasi GOW...">
+                        <div class="col-md-6 mb-4">
+                            <label for="thumbnail_caption" class="form-label fw-semibold">Deskripsi Gambar
+                                (Caption)</label>
+                            <input type="text" class="form-control" id="thumbnail_caption" name="thumbnail_caption"
+                                value="<?= htmlspecialchars($post['thumbnail_caption'] ?? '') ?>"
+                                placeholder="Contoh: Kegiatan rapat koordinasi GOW...">
+                        </div>
                     </div>
 
                     <div class="mb-4">
@@ -218,7 +231,7 @@
                             Batal
                         </a>
                         <button type="submit" class="btn btn-success px-4">
-                            <i class="bi bi-save me-1"></i> Simpan Perubahan
+                            <i class="bi bi-save me-1"></i> Simpan
                         </button>
                     </div>
 
